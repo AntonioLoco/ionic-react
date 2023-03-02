@@ -73,6 +73,7 @@ ThunkAction<
   unknown,
   AnyAction
 >  => async (dispatch) => {
+    console.log("Chiamo Api");
     dispatch(startLoading());
     dispatch(cleanError());
     try {

@@ -18,7 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Import api for get all products
-import { getAllProducts, Product } from "../../redux/reducers/apiReducers";
+import { getAllProducts } from "../../redux/reducers/apiReducers";
 import { RootState } from "../../redux/store";
 
 //Import Component Product List

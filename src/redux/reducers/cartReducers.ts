@@ -32,7 +32,7 @@ export const cartSlice = createSlice({
                 if(el.product.id === action.payload.product.id){
                     el.quantity += action.payload.quantity;
                     state.totalProduct += action.payload.quantity;
-                    state.totalPrice += el.product.price;
+                    state.totalPrice += el.product.price * action.payload.quantity;
                     isPresent = true;
                 }
             })
