@@ -11,12 +11,14 @@ type ProductCart = {
 export type CartState = {
     cart: ProductCart[],
     totalPrice: number,
+    totalProduct: number
 }
 
 //Initial Cart State
 const initialState: CartState = {
     cart: [],
     totalPrice: 0,
+    totalProduct: 0
 }
 
 export const cartSlice = createSlice({
@@ -29,6 +31,7 @@ export const cartSlice = createSlice({
                 
                 if(el.product.id === action.payload.product.id){
                     el.quantity += action.payload.quantity;
+                    state.totalProduct += action.payload.quantity;
                     state.totalPrice += el.product.price;
                     isPresent = true;
                 }
@@ -36,18 +39,21 @@ export const cartSlice = createSlice({
 
             if(!isPresent){
                 state.cart.push({product: action.payload.product, quantity: action.payload.quantity})
+                state.totalProduct += action.payload.quantity;
                 state.totalPrice += action.payload.product.price * action.payload.quantity;
             }
         },
         cleanCart: (state) => {
             state.cart = [];
             state.totalPrice = 0;
+            state.totalProduct = 0;
         },
         deleteToCart: (state, action) => {
             const cart = state.cart.filter(el => {
                 return el.product.id !== action.payload.product.id
             })
             state.totalPrice -= action.payload.product.price * action.payload.quantity;
+            state.totalProduct -= action.payload.quantity;
             state.cart = cart;
         }
     }

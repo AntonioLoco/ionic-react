@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -20,7 +21,12 @@ const ErrorPage: React.FC = () => {
           <IonTitle>Page Not Found</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">Nessuna Pagina Trovata</IonContent>
+      <IonContent className="ion-padding">
+        <div>
+          <h1>Error 404!Page Not Found.</h1>
+          <IonButton>Back to Products</IonButton>
+        </div>
+      </IonContent>
     </IonPage>
   );
 };

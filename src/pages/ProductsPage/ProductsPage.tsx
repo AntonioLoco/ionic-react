@@ -8,6 +8,7 @@ import {
   IonIcon,
   IonMenuButton,
   IonPage,
+  IonSpinner,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -29,7 +30,7 @@ const ProductsPage: React.FC = () => {
   const { products, loading, error } = useSelector(
     (state: RootState) => state.products
   );
-  const { cart } = useSelector((state: RootState) => state.cart);
+  const { totalProduct } = useSelector((state: RootState) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
   const [productModal, setProductModal] = useState({
     id: 0,
@@ -60,16 +61,20 @@ const ProductsPage: React.FC = () => {
             routerLink="/shopping-cart"
           >
             <IonIcon icon={cartOutline} />
-            <IonBadge color="danger">{cart.length}</IonBadge>
+            <IonBadge color="danger">{totalProduct}</IonBadge>
           </IonButton>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
         {loading ? (
-          "Loading"
+          <div className="wrapper">
+            <IonSpinner></IonSpinner>
+          </div>
         ) : error.status ? (
-          "Errore"
+          <div className="wrapper">
+            <h1>Error! {error.message}</h1>
+          </div>
         ) : (
           <div>
             <ProductList
