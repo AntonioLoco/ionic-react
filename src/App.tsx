@@ -26,10 +26,9 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import ProductsPage from "./pages/ProductsPage";
-import ShoppingCartPage from "./pages/ShoppingCartPage";
-import FavoriteProductsPage from "./pages/FavoriteProductsPage";
-import ErrorPage from "./pages/ErrorPage";
+import ProductsPage from "./pages/ProductsPage/ProductsPage";
+import ShoppingCartPage from "./pages/ShoppingCartPage/ShoppingCartPage";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 // Pages Component
 
@@ -46,11 +45,6 @@ const App: React.FC = () => {
               <Redirect to="/products" />
             </Route>
             <Route path="/products" exact={true} component={ProductsPage} />
-            <Route
-              path="/products/favorites"
-              exact={true}
-              component={FavoriteProductsPage}
-            />
             <Route
               path="/shopping-cart"
               exact={true}

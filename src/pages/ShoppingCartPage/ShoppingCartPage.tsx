@@ -18,10 +18,10 @@ import { trashOutline } from "ionicons/icons";
 
 //Import redux
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 
 //Import deleteToCart function
-import { deleteToCart, cleanCart } from "../redux/reducers/cartReducers";
+import { deleteToCart, cleanCart } from "../../redux/reducers/cartReducers";
 
 const ShoppingCartPage: React.FC = () => {
   const { cart, totalPrice } = useSelector((state: RootState) => state.cart);

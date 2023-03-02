@@ -8,16 +8,16 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
+  IonToggle,
 } from "@ionic/react";
 
 import { useLocation } from "react-router-dom";
 import {
-  heartOutline,
-  heartSharp,
   listOutline,
   listSharp,
   cartOutline,
   cartSharp,
+  moon,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -40,12 +40,6 @@ const appPages: AppPage[] = [
     url: "/shopping-cart",
     iosIcon: cartOutline,
     mdIcon: cartSharp,
-  },
-  {
-    title: "Favorites",
-    url: "/products/favorites",
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
   },
 ];
 
@@ -81,6 +75,14 @@ const Menu: React.FC = () => {
               </IonMenuToggle>
             );
           })}
+        </IonList>
+        <IonList>
+          <IonItem>
+            <IonIcon icon={moon} />
+            <IonToggle
+              onClick={() => document.body.classList.toggle("dark")}
+            ></IonToggle>
+          </IonItem>
         </IonList>
       </IonContent>
     </IonMenu>
