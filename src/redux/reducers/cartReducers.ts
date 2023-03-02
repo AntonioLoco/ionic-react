@@ -28,15 +28,15 @@ export const cartSlice = createSlice({
             state.cart.find((el) => {
                 
                 if(el.product.id === action.payload.product.id){
-                    el.quantity += 1;
+                    el.quantity += action.payload.quantity;
                     state.totalPrice += el.product.price;
                     isPresent = true;
                 }
             })
 
             if(!isPresent){
-                state.cart.push({product: action.payload.product, quantity: 1})
-                state.totalPrice += action.payload.product.price;
+                state.cart.push({product: action.payload.product, quantity: action.payload.quantity})
+                state.totalPrice += action.payload.product.price * action.payload.quantity;
             }
         },
         cleanCart: (state) => {

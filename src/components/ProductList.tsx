@@ -17,7 +17,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reducers/cartReducers";
 import { RootState } from "../redux/store";
 
-const ProductList = ({ products }: { products: Product[] }) => {
+const ProductList = ({
+  products,
+  openModal,
+  setProductModal,
+}: {
+  products: Product[];
+  openModal: (open: boolean) => void;
+  setProductModal: (product: Product) => void;
+}) => {
   const dispatch = useDispatch();
   const { cart, totalPrice } = useSelector((state: RootState) => state.cart);
 
@@ -35,17 +43,24 @@ const ProductList = ({ products }: { products: Product[] }) => {
               key={index}
             >
               <IonCard className="card">
-                <img alt={el.title} src={el.image} className="img-card" />
-                <IonCardHeader>
-                  <IonCardTitle>{el.title}</IonCardTitle>
-                  <IonCardSubtitle>{el.category}</IonCardSubtitle>
-                </IonCardHeader>
+                <div
+                  onClick={() => {
+                    setProductModal(el);
+                    openModal(true);
+                  }}
+                >
+                  <img alt={el.title} src={el.image} className="img-card" />
+                  <IonCardHeader>
+                    <IonCardTitle>{el.title}</IonCardTitle>
+                    <IonCardSubtitle>{el.category}</IonCardSubtitle>
+                  </IonCardHeader>
 
-                <IonCardContent>
-                  <p>
-                    Price: <strong>{el.price}$</strong>
-                  </p>
-                </IonCardContent>
+                  <IonCardContent>
+                    <p>
+                      Price: <strong>{el.price}$</strong>
+                    </p>
+                  </IonCardContent>
+                </div>
                 <IonButton
                   className="btn-add"
                   color="success"

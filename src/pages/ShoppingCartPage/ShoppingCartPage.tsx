@@ -10,6 +10,7 @@ import {
   IonList,
   IonMenuButton,
   IonPage,
+  IonThumbnail,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -51,6 +52,9 @@ const ShoppingCartPage: React.FC = () => {
             {cart.map((el) => {
               return (
                 <IonItem key={el.product.id}>
+                  <IonThumbnail slot="start">
+                    <img src={el.product.image} alt={el.product.title} />
+                  </IonThumbnail>
                   <IonLabel>
                     <div className="ion-item-content">
                       <div>
