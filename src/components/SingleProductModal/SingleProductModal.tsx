@@ -10,11 +10,14 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { add, cartOutline, remove, star } from "ionicons/icons";
-import { Product } from "../redux/reducers/apiReducers";
-
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/reducers/cartReducers";
 import { useState } from "react";
+
+//Import From Store
+//Type of Product
+import { Product } from "../../redux/reducers/apiReducers";
+//Action Add to Cart
+import { addToCart } from "../../redux/reducers/cartReducers";
 
 const SingleProductModal = ({
   product,
@@ -26,12 +29,15 @@ const SingleProductModal = ({
   setIsOpen: (value: boolean) => void;
 }) => {
   const dispatch = useDispatch();
+  //Quantity for the product
   const [quantity, setQuantity] = useState(1);
 
+  //Function addQuantity
   const addQuantity = () => {
     setQuantity(quantity + 1);
   };
 
+  //Function RemoveQuantity
   const removeQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -39,7 +45,9 @@ const SingleProductModal = ({
   };
 
   return (
+    // Modal
     <IonModal isOpen={isOpen}>
+      {/* Header Modal */}
       <IonHeader>
         <IonToolbar>
           <IonTitle>{product.title}</IonTitle>
@@ -48,9 +56,12 @@ const SingleProductModal = ({
           </IonButtons>
         </IonToolbar>
       </IonHeader>
+
+      {/* Content Modal */}
       <IonContent className="ion-padding">
+        {/* Product Image */}
         <div className="modal-img">
-          <img src={product.image} alt="" />
+          <img src={product.image} alt={product.title} />
         </div>
         <div className="modal-content">
           {/* Title */}

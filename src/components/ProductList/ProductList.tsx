@@ -12,9 +12,12 @@ import {
   IonRow,
 } from "@ionic/react";
 import { cartOutline } from "ionicons/icons";
-import { Product } from "../redux/reducers/apiReducers";
+
+//Import type Product
+import { Product } from "../../redux/reducers/apiReducers";
+//Import Action AddtoCart
+import { addToCart } from "../../redux/reducers/cartReducers";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/reducers/cartReducers";
 
 const ProductList = ({
   products,
@@ -29,6 +32,7 @@ const ProductList = ({
 
   return (
     <IonGrid fixed={true}>
+      {/* Product List */}
       <IonRow>
         {products.map((el: Product, index: number) => {
           return (
@@ -40,7 +44,9 @@ const ProductList = ({
               size-xl="6"
               key={index}
             >
+              {/* Single Product */}
               <IonCard className="card">
+                {/* Product Image */}
                 <div
                   onClick={() => {
                     setProductModal(el);
@@ -59,6 +65,8 @@ const ProductList = ({
                     </p>
                   </IonCardContent>
                 </div>
+
+                {/* Button for Add to Cart */}
                 <IonButton
                   className="btn-add"
                   color="success"

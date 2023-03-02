@@ -6,7 +6,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Menu from "./components/Menu";
+import Menu from "./components/Menu/Menu";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -42,15 +42,18 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Switch>
+              {/* Initial Route */}
               <Route path="/" exact>
                 <Redirect to="/products" />
               </Route>
+
+              {/* Route Products */}
               <Route path="/products" exact component={ProductsPage} />
-              <Route
-                path="/shopping-cart"
-                exact={true}
-                component={ShoppingCartPage}
-              />
+
+              {/* Route Shopping Cart */}
+              <Route path="/shopping-cart" exact component={ShoppingCartPage} />
+
+              {/* Route Not Found  */}
               <Route path="*" component={ErrorPage} />
             </Switch>
           </IonRouterOutlet>

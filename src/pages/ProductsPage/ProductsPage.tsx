@@ -1,4 +1,6 @@
 import "./ProductsPage.css";
+import React, { useEffect, useState } from "react";
+
 import {
   IonBadge,
   IonButton,
@@ -13,25 +15,33 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { cartOutline } from "ionicons/icons";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 //Import api for get all products
 import { getAllProducts } from "../../redux/reducers/apiReducers";
+
+//Import Redux
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 //Import Component Product List
-import ProductList from "../../components/ProductList";
-import SingleProductModal from "../../components/SingleProductModal";
+import ProductList from "../../components/ProductList/ProductList";
+import SingleProductModal from "../../components/SingleProductModal/SingleProductModal";
 
 const ProductsPage: React.FC = () => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
+
+  //Get Product Loading Error from Store
   const { products, loading, error } = useSelector(
     (state: RootState) => state.products
   );
+
+  // Get TotalProduct from Store
   const { totalProduct } = useSelector((state: RootState) => state.cart);
+
+  //State for Open Single Product Modal
   const [isOpen, setIsOpen] = useState(false);
+  //Product of Modal
   const [productModal, setProductModal] = useState({
     id: 0,
     category: "",
@@ -43,6 +53,7 @@ const ProductsPage: React.FC = () => {
   });
 
   useEffect(() => {
+    //Call Api for Get All Products
     dispatch(getAllProducts());
   }, []);
 
@@ -54,6 +65,8 @@ const ProductsPage: React.FC = () => {
             <IonMenuButton />
           </IonButtons>
           <IonTitle>Products</IonTitle>
+
+          {/* Link to Cart */}
           <IonButton
             slot="end"
             color="success"
@@ -68,20 +81,24 @@ const ProductsPage: React.FC = () => {
 
       <IonContent fullscreen>
         {loading ? (
+          // Loading
           <div className="wrapper">
             <IonSpinner></IonSpinner>
           </div>
         ) : error.status ? (
+          // Error
           <div className="wrapper">
             <h1>Error! {error.message}</h1>
           </div>
         ) : (
           <div>
+            {/* List of Product */}
             <ProductList
               products={products}
               openModal={setIsOpen}
               setProductModal={setProductModal}
             />
+            {/* Modal for single Product */}
             <SingleProductModal
               product={productModal}
               isOpen={isOpen}

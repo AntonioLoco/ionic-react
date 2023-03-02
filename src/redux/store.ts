@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-//Cart Reducer
+//Cart Reducer and Type
 import cartReducer from "./reducers/cartReducers";
 import { CartState } from "./reducers/cartReducers";
 
-//Product Reducer
+//Product Reducer and Type
 import apiReducer  from "./reducers/apiReducers";
 import { ProductState } from "./reducers/apiReducers";
 

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { Product } from "./apiReducers";
 
 //Type of singleCart
@@ -27,19 +27,29 @@ export const cartSlice = createSlice({
     reducers: {
         addToCart: (state, action) => {
             let isPresent = false;
+
+            //Find The Product
             state.cart.find((el) => {
                 
+                //If Product is alredy present
                 if(el.product.id === action.payload.product.id){
+                    //Increment quantity
                     el.quantity += action.payload.quantity;
+                    //Increment total Product
                     state.totalProduct += action.payload.quantity;
+                    //Increment total Price
                     state.totalPrice += el.product.price * action.payload.quantity;
                     isPresent = true;
                 }
             })
 
+            //If Product is not present
             if(!isPresent){
+                //Add Product to array of products
                 state.cart.push({product: action.payload.product, quantity: action.payload.quantity})
+                //Increment total Product
                 state.totalProduct += action.payload.quantity;
+                //Increment total Price
                 state.totalPrice += action.payload.product.price * action.payload.quantity;
             }
         },
@@ -52,8 +62,11 @@ export const cartSlice = createSlice({
             const cart = state.cart.filter(el => {
                 return el.product.id !== action.payload.product.id
             })
+            //Decrement total Price
             state.totalPrice -= action.payload.product.price * action.payload.quantity;
+            //Decrement total Product
             state.totalProduct -= action.payload.quantity;
+            //Set new cart without the product
             state.cart = cart;
         }
     }
@@ -62,6 +75,6 @@ export const cartSlice = createSlice({
 //Export Action for Dispatch
 export const {addToCart, cleanCart, deleteToCart} = cartSlice.actions
 
-
+//Export reducer for Store
 const { reducer } = cartSlice;
 export default reducer;

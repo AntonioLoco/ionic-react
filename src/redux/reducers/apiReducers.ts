@@ -1,6 +1,7 @@
 import { AnyAction, createSlice, ThunkAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
+//Link Api Products
 const PRODUCTS_URL = 'https://fakestoreapi.com/products';
 
 //Type of product 
@@ -63,16 +64,16 @@ export const apiReducers = createSlice({
     }
 })
 
+//Get Actions
 const { startLoading, stopLoading, saveData, catchError, cleanError } = apiReducers.actions;
 
-//Function to take All Products
-export const getAllProducts = ():
-ThunkAction<
-  Promise<void>,
-  RootState,
-  unknown,
-  AnyAction
->  => async (dispatch) => {
+//Funzione che ci restituisce una funzione asincrona per prendere tutti i prodotti
+//Tipi della funzione: 
+// Promise<void> -> ritorno della funzione asincrona, che sarà void
+//RootState -> Type of Store
+//uknown -> tipo di input della funzione
+//AnyAction -> Azione che viene inviata al dispatcher di redux
+export const getAllProducts = ():ThunkAction<Promise<void>,RootState,unknown,AnyAction>  => async (dispatch) => {
     dispatch(startLoading());
     dispatch(cleanError());
     try {
@@ -84,5 +85,6 @@ ThunkAction<
     dispatch(stopLoading());
 }
 
+//Export reducer for Store
 const { reducer } = apiReducers;
 export default reducer;

@@ -1,4 +1,6 @@
 import "./ShoppingCartPage.css";
+import React from "react";
+
 import {
   IonButton,
   IonButtons,
@@ -14,7 +16,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
 import { trashOutline } from "ionicons/icons";
 
 //Import redux
@@ -39,36 +40,47 @@ const ShoppingCartPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
+        {/* Wrapper Shopping Cart */}
         <div className="shopping-cart-container">
           <h3>Your Shopping Cart</h3>
+
+          {/* Cart List */}
           <IonList>
-            {cart.length === 0 ? (
+            {/* Item Empty Cart */}
+            {cart.length === 0 && (
               <IonItem>
                 <IonLabel>Non ci sono prodotti nel tuo carrello!</IonLabel>
               </IonItem>
-            ) : (
-              ""
             )}
+
             {cart.map((el) => {
               return (
+                // Product Item
                 <IonItem key={el.product.id}>
                   <IonThumbnail slot="start">
+                    {/* Image Product */}
                     <img src={el.product.image} alt={el.product.title} />
                   </IonThumbnail>
                   <IonLabel>
                     <div className="ion-item-content">
+                      {/* Quantity and Title */}
                       <div>
                         <p>
                           Qnt: <strong>{el.quantity}</strong>
                         </p>
                         <h2>{el.product.title}</h2>
                       </div>
+
+                      {/* Price and Delete */}
                       <div className="ion-text-center">
                         <p>
-                          Price:{" "}
-                          <strong>{el.product.price * el.quantity} $</strong>
+                          Price:
+                          <strong>
+                            {(el.product.price * el.quantity).toFixed(2)} $
+                          </strong>
                         </p>
                         <div>
+                          {/* Button Delete Product */}
                           <IonButton
                             color="danger"
                             fill="solid"
@@ -86,12 +98,17 @@ const ShoppingCartPage: React.FC = () => {
                 </IonItem>
               );
             })}
+
+            {/* Footer Item */}
             <IonItem>
               <IonLabel>
                 <div className="bottom-list">
+                  {/* Total Price */}
                   <h1>
-                    Total Price: <strong>{totalPrice} $</strong>
+                    Total Price: <strong>{totalPrice.toFixed(2)} $</strong>
                   </h1>
+
+                  {/* Button Buy Cart */}
                   <IonButton
                     fill="solid"
                     color="success"

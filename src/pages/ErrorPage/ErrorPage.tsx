@@ -1,3 +1,4 @@
+import "./ErrorPage.css";
 import {
   IonButton,
   IonButtons,
@@ -22,9 +23,9 @@ const ErrorPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <div>
+        <div className="wrapper-error-page">
           <h1>Error 404!Page Not Found.</h1>
-          <IonButton>Back to Products</IonButton>
+          <IonButton routerLink="/products">Back to Products</IonButton>
         </div>
       </IonContent>
     </IonPage>
