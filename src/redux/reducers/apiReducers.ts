@@ -1,4 +1,4 @@
-import { AnyAction, createSlice, ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { AnyAction, createSlice, ThunkAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../store";
 const PRODUCTS_URL = 'https://fakestoreapi.com/products';
@@ -73,13 +73,11 @@ ThunkAction<
   unknown,
   AnyAction
 >  => async (dispatch) => {
-    console.log("Chiamo Api");
     dispatch(startLoading());
     dispatch(cleanError());
     try {
         const response = await axios.get(PRODUCTS_URL);
         dispatch(saveData(response.data));
-        
     } catch (error: any) {
         dispatch(catchError(error.errors));
     }

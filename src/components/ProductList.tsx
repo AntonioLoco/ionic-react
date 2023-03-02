@@ -13,9 +13,8 @@ import {
 } from "@ionic/react";
 import { cartOutline } from "ionicons/icons";
 import { Product } from "../redux/reducers/apiReducers";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/reducers/cartReducers";
-import { RootState } from "../redux/store";
 
 const ProductList = ({
   products,
@@ -27,7 +26,6 @@ const ProductList = ({
   setProductModal: (product: Product) => void;
 }) => {
   const dispatch = useDispatch();
-  const { cart, totalPrice } = useSelector((state: RootState) => state.cart);
 
   return (
     <IonGrid fixed={true}>
